@@ -16,9 +16,12 @@ function addBookToLibrary(title, author, genre, isRead){
   myLibrary.unshift(book);
 }
 
+
 // Displays the Books 
 function displayBooks(myLibrary){
-  
+  myLibrary.forEach(element => {
+    console.log(element);
+  });
 }
 
 // Add pre-existing books to test on
