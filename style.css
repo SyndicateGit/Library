@@ -191,10 +191,14 @@ body{
 .book .book-delete{
   box-sizing: border-box;
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 10px;
+  right: 15px;
 
   cursor: pointer;
+}
+
+.book-delete:hover{
+  color: red;
 }
 
 /* CSS */
