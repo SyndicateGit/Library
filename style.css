@@ -10,7 +10,8 @@
 --btn-color-hover: #F3F4F6;
 --btn-color-inactive: rgb(250, 251, 252, 75%);
 
---book-font-size: 1.5rem;
+--book-font-size: 1rem;
+--book-background: linear-gradient(to right, #654321, #DEB887);
 }
 
 /*Background*/
@@ -133,6 +134,7 @@ body{
   /*books top right*/
   justify-content: start;
   align-content: start;
+  gap: 1rem;
 
 
   /*Generate new rows when full*/
@@ -144,6 +146,7 @@ body{
 .book{
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 
   width: 200px;
   height: 250px;
@@ -155,13 +158,13 @@ body{
 
   border-radius: 10px 25px 25px 10px;
   border-right: 0.5rem solid whitesmoke;
-  border-left: 4px solid #654321;
+  border-left: 4px solid black;
 
   font-size: var(--book-font-size);
   font-weight: bold;
   color: black;
 
-  background-color:#DEB887;
+  background: var(--book-background);
 }
 
 /*All child of .book*/
@@ -169,8 +172,14 @@ body{
   flex: 1;
 }
 
+.book .book-category{
+  font-size: 1.3rem;
+}
+
 /*isRead toggle*/
 .book .isRead-toggle{
+  flex: 0;
+  
   display: flex;
   justify-content: end;
   align-items: center;
