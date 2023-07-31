@@ -17,7 +17,7 @@ function addBookToLibrary(title, author, genre, isRead){
 }
 
 // Add pre-existing books to test on
-addBookToLibrary('Floriography: An Illustrated Guide to the Victorian Language of Flowers', 'Jessica Roux', 'Reference work', true);
+addBookToLibrary('Floriography: An Illustrated Guide to the Victorian Language of Flowers', 'Jessica Roux', 'Reference work', false);
 
 
 // Displays the Books 
@@ -25,10 +25,17 @@ function displayBooks(myLibrary){
   // Clear Library before redisplaying
   document.querySelector('.book-display-container').innerHTML="";
 
+  let index = 0;
+
   myLibrary.forEach(element => {
     /*Inserts Book html to book container. Info based on object.*/
     const div = document.createElement('div');
     div.setAttribute('class', 'book');
+
+    // Assign index id to use for deleting book function later
+    div.setAttribute('id', index);
+    index++;
+
     div.innerHTML=`
     <div class="book-delete">x</div>
     <span class="book-title">
@@ -50,7 +57,10 @@ function displayBooks(myLibrary){
     `;
 
     /*Checks read box if read*/
-    div.querySelector('input').setAttribute('checked', element.isRead);
+    if(element.isRead){
+      div.querySelector('#isRead').setAttribute('checked', element.isRead);
+    }
+
 
     document.querySelector('.book-display-container').appendChild(div);
 
@@ -74,7 +84,8 @@ function getBookFromInput(){
   const title = document.getElementById('title').value 
   const author = document.getElementById('author').value
   const genre = document.getElementById('genre').value
-  const isRead = document.getElementById('isRead').checked
+  const isRead = document.getElementById('form-isRead').checked
+  console.log(isRead);
   return new Book(title, author, genre, isRead)
 }
 
@@ -83,6 +94,8 @@ function submitForm(e){
   e.preventDefault();
 
   const newBook = getBookFromInput()
+
+  console.log(newBook);
   
   // Prevents submission if required fields are empty
   if(newBook.title == '' || newBook.author ==''|| newBook.genre == ''){
@@ -100,11 +113,16 @@ function submitForm(e){
   document.getElementById('title').value = "";
   document.getElementById('author').value = "";
   document.getElementById('genre').value = "";
-  document.getElementById('isRead').removeAttribute('checked');
+  document.getElementById('form-isRead').checked = false;
 
   /** Refreshes Library*/
   displayBooks(myLibrary);
 }
+
+function deleteBook(){
+  
+}
+
 // Query selectors and Event Listeners
 
   //+ New Book button opens form
