@@ -16,6 +16,8 @@ function addBookToLibrary(title, author, genre, isRead){
   myLibrary.unshift(book);
 }
 
+
+
 // Add pre-existing books to test on
 addBookToLibrary('Floriography: An Illustrated Guide to the Victorian Language of Flowers', 'Jessica Roux', 'Reference work', false);
 
@@ -34,10 +36,10 @@ function displayBooks(myLibrary){
 
     // Assign index id to use for deleting book function later
     div.setAttribute('id', index);
-    index++;
+ 
 
     div.innerHTML=`
-    <div class="book-delete">x</div>
+    <div class="book-delete" id = "${index}">x</div>
     <span class="book-title">
       <span class="book-category">Title: </span>
       <span class="book-info">${element.title}</span>
@@ -55,6 +57,9 @@ function displayBooks(myLibrary){
       <input type="checkbox" name="isRead" id="isRead">
     </label>
     `;
+    
+    // Increment index for next ID
+    index++;
 
     /*Checks read box if read*/
     if(element.isRead){
@@ -65,7 +70,19 @@ function displayBooks(myLibrary){
     document.querySelector('.book-display-container').appendChild(div);
 
   });
+
+  // Add deleteBook event listener to book x button
+  const deleteBook = document.querySelectorAll('.book-delete')
+  
+  deleteBook.forEach(book =>{
+    book.addEventListener("click", function(e){
+      myLibrary.splice(e.id, 1);
+      displayBooks(myLibrary);
+    });
+  })
 }
+
+
 
 // Displays form
 function openForm(){
@@ -85,7 +102,7 @@ function getBookFromInput(){
   const author = document.getElementById('author').value
   const genre = document.getElementById('genre').value
   const isRead = document.getElementById('form-isRead').checked
-  console.log(isRead);
+
   return new Book(title, author, genre, isRead)
 }
 
@@ -95,7 +112,6 @@ function submitForm(e){
 
   const newBook = getBookFromInput()
 
-  console.log(newBook);
   
   // Prevents submission if required fields are empty
   if(newBook.title == '' || newBook.author ==''|| newBook.genre == ''){
@@ -117,11 +133,9 @@ function submitForm(e){
 
   /** Refreshes Library*/
   displayBooks(myLibrary);
+
 }
 
-function deleteBook(){
-  
-}
 
 // Query selectors and Event Listeners
 
@@ -137,6 +151,6 @@ newBookBtn.addEventListener("click", openForm)
   const addBook = document.querySelector("#add")
   addBook.addEventListener("click", submitForm);
 
-
-
 displayBooks(myLibrary);
+
+
