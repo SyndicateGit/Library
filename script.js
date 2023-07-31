@@ -76,7 +76,7 @@ function displayBooks(myLibrary){
   
   deleteBook.forEach(book =>{
     book.addEventListener("click", function(e){
-      myLibrary.splice(e.id, 1);
+      myLibrary.splice(e.target.id, 1);
       displayBooks(myLibrary);
     });
   })
